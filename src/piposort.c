@@ -30,7 +30,7 @@
 void FUNC(branchless_oddeven_sort)(VAR *array, size_t nmemb, CMPFUNC *cmp)
 {
 	VAR swap, *pta, *pte;
-	unsigned char w, x, y, z = 1;
+	unsigned char w = 1, x, y, z = 1;
 
 	switch (nmemb)
 	{
@@ -38,7 +38,6 @@ void FUNC(branchless_oddeven_sort)(VAR *array, size_t nmemb, CMPFUNC *cmp)
 			pte = array + nmemb - 3;
 			do
 			{
-				w = z;
 				pta = pte + (z = !z);
 
 				do
@@ -47,12 +46,14 @@ void FUNC(branchless_oddeven_sort)(VAR *array, size_t nmemb, CMPFUNC *cmp)
 				}
 				while (pta >= array);
 			}
-			while (w && --nmemb);
+			while (w-- && --nmemb);
 			return;
 		case 3:
 			pta = array;
 			x = cmp(pta, pta + 1) > 0; y = !x; swap = pta[y]; pta[0] = pta[x]; pta[1] = swap; pta++;
 			x = cmp(pta, pta + 1) > 0; y = !x; swap = pta[y]; pta[0] = pta[x]; pta[1] = swap;
+			if (x == 0)
+				return;
 		case 2:
 			pta = array;
 			x = cmp(pta, pta + 1) > 0; y = !x; swap = pta[y]; pta[0] = pta[x]; pta[1] = swap;
