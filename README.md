@@ -52,7 +52,7 @@ Performance
 -----------
 For random data piposort is one of the fastest sorts available. There is no adaptivity for generic data, so [fluxsort](https://github.com/scandum/fluxsort) would outperform piposort for random data with low cardinality.
 
-To take full advantage of branchless operations the cmp macro needs to be uncommented in bench.c, which will increase the performance by 30% on primitive types. This mode only allows sorting arrays of unsigned primitives by default.
+To take full advantage of branchless operations the cmp macro needs to be uncommented in bench.c, which will increase the performance by 30% on primitive types. This mode only allows sorting arrays of signed primitives by default.
 
 The code is optimized for gcc and needs to be compiled with the -O3 option for proper performance.
 
